@@ -894,6 +894,19 @@ do
 	Round(Main, 6)
 	Stroke(Main, Colors.Outline)
 
+	local BackgroundImage = "rbxassetid://17835822166"
+
+	local Backdrop = New("ImageLabel", {
+		Name = "Backdrop",
+		Size = UDim2.fromScale(1, 1),
+		BackgroundTransparency = 1,
+		Image = BackgroundImage,
+		ScaleType = Enum.ScaleType.Crop,
+		ImageColor3 = Color3.fromRGB(205, 205, 205),
+		ZIndex = 0,
+	}, Main)
+	Round(Backdrop, 6)
+
 	local TitleBar = New("Frame", {
 		Size = UDim2.new(1, 0, 0, 38),
 		BackgroundTransparency = 1,
@@ -973,7 +986,7 @@ do
 		Line.BackgroundColor3 = Scheme.AccentColor
 	end)
 
-	local Handle = New("TextButton", {
+	local Handle = New("ImageButton", {
 		Name = "Handle",
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.new(0.5, 0, 0, -40),
@@ -981,11 +994,20 @@ do
 		BackgroundColor3 = Colors.Back,
 		BorderSizePixel = 0,
 		AutoButtonColor = false,
+		Image = BackgroundImage,
+		ScaleType = Enum.ScaleType.Crop,
+		ImageColor3 = Color3.fromRGB(205, 205, 205),
+	}, Gui)
+	New("TextLabel", {
+		Size = UDim2.fromScale(1, 1),
+		BackgroundTransparency = 1,
 		Text = "BimHub  ▾",
 		Font = FontBold,
 		TextSize = 12,
 		TextColor3 = Colors.Text,
-	}, Gui)
+		TextStrokeTransparency = 0.3,
+		ZIndex = 2,
+	}, Handle)
 	Round(Handle, 4)
 	Stroke(Handle, Colors.Outline)
 
@@ -1023,6 +1045,7 @@ do
 		Position = UDim2.fromOffset(8, 48),
 		Size = UDim2.new(0, SideWidth, 1, -56),
 		BackgroundColor3 = Colors.Panel,
+		BackgroundTransparency = 0.3,
 		BorderSizePixel = 0,
 	}, Main)
 	Round(Sidebar, 5)
@@ -1296,6 +1319,7 @@ do
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundColor3 = Colors.Panel,
+			BackgroundTransparency = 0.35,
 			BorderSizePixel = 0,
 			LayoutOrder = #Tab.Sections + 1,
 		}, Tab.Page)
@@ -1338,6 +1362,7 @@ do
 		local Row = New("Frame", {
 			Size = UDim2.new(1, 0, 0, Height),
 			BackgroundColor3 = Colors.Item,
+			BackgroundTransparency = 0.2,
 			BorderSizePixel = 0,
 		})
 		Round(Row, 4)
@@ -2217,6 +2242,7 @@ do
 			Size = UDim2.new(1, 0, 0, 30),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundColor3 = Colors.Item,
+			BackgroundTransparency = 0.2,
 			BorderSizePixel = 0,
 		})
 		Round(Row, 4)
