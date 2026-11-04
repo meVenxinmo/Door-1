@@ -2011,6 +2011,9 @@ do
 				Slider:SetValue(Slider.Min + (Slider.Max - Slider.Min) * Alpha)
 			end
 			State.Drag = Update
+			if State.Tab then
+				State.Tab.Page.ScrollingEnabled = false
+			end
 			Update(Vector2.new(Input.Position.X, Input.Position.Y))
 		end)
 
@@ -2046,7 +2049,7 @@ do
 				Selected = self.Value == Value
 			end
 			Button.TextColor3 = Selected and Scheme.AccentColor or Colors.Text
-			Button.Check.Visible = Selected
+			self.Checks[Value].Visible = Selected
 		end
 	end
 
@@ -2055,6 +2058,7 @@ do
 			Button:Destroy()
 		end
 		self.Buttons = {}
+		self.Checks = {}
 
 		for Index, Value in ipairs(self.Values) do
 			local Button = New("TextButton", {
@@ -2072,7 +2076,7 @@ do
 			Pad(Button, 10, 10, 0, 0)
 			Hover(Button, Colors.Panel, Colors.ItemHover)
 
-			Button.Check = New("TextLabel", {
+			self.Checks[Value] = New("TextLabel", {
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.new(1, 0, 0.5, 0),
 				Size = UDim2.fromOffset(16, 16),
@@ -2182,6 +2186,7 @@ do
 			AllowNull = Options.AllowNull and true or false,
 			Callbacks = {},
 			Buttons = {},
+			Checks = {},
 			Text = Options.Text,
 			Open = false,
 		}, DropdownMeta)
@@ -2634,6 +2639,9 @@ do
 	Connect(UserInputService.InputEnded, function(Input)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 			State.Drag = nil
+			if State.Tab then
+				State.Tab.Page.ScrollingEnabled = true
+			end
 		end
 		if Input.UserInputType == Enum.UserInputType.Keyboard then
 			for _, Bind in ipairs(Binds) do
